@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="kr.ac.inhatc.mvc.mapper.BoardMapper">
+   <insert id="registUser">
+      INSERT INTO user
+      (id, pw, name, gender, birthday, email, phone, address)
+      VALUES
+      (#{id}, #{pw}, #{name}, #{gender}, #{birthday}, #{email}, #{phone}, #{address})
+   </insert>
+   
+   <select id="login" parameterType="String" resultType="hashmap">
+      SELECT
+         id, pw
+      FROM user      
+
+      WHERE id = #{inputUserName}
+
+   </select>
+   
+   <insert id="registProduct">
+      INSERT INTO product
+      (pcode, pname, price, detail, company, classification, amount)
+      VALUES
+      (#{pcode}, #{pname}, #{price}, #{detail}, #{company}, #{classification}, #{amount})
+   </insert>
+   
+   <select id="products" parameterType="String" resultType="hashmap">
+      SELECT
+         pcode, pname, price, detail, company, classification, amount
+      FROM product
+      WHERE 1=1
+   </select>   
+   
+   <select id="productDetail" parameterType="String" resultType="hashmap">
+      SELECT
+         pcode, pname, price, detail, company, classification, amount
+      FROM product
+      WHERE pcode=#{value}
+   </select>      
+   
+   <update id="updateProduct">
+      UPDATE product   
+      SET
+          pname = #{pname},
+          price = #{price},
+          detail = #{detail},
+          company = #{company},
+          classification = #{classification},
+          amount = #{amount}
+      WHERE pcode = #{pcode}    
+   </update>   
+   
+   <delete id="deleteProduct" parameterType="String">
+      DELETE FROM product
+        WHERE pcode = #{value}
+   </delete>   
+   
+
+   
+   
+<!--    //////////////////////////////////////////////////////// -->
+   
+   <select id="selectSubjectOne" parameterType="String" resultType="hashmap">
+      SELECT
+          ID, SUBJECT, GRADE, DESCRIPTION, USE_YN, REG_USER
+      FROM SAMPLE
+      WHERE ID=#{value}
+   </select>   
+
+   <select id="getName" resultType="String">
+      select member from test
+   </select>
+   
+   <select id="selectSubjectList" parameterType="String" resultType="hashmap">
+      SELECT
+         ID, SUBJECT, GRADE, DESCRIPTION, USE_YN, REG_USER
+      FROM SAMPLE 
+      WHERE 1=1
+      <if test="keyword != null and keyword != ''">
+        <if test="condition == 1">
+          AND SUBJECT LIKE CONCAT('%',#{keyword} ,'%')
+        </if>
+        <if test="condition == 0">
+          AND DESCRIPTION LIKE CONCAT('%',#{keyword} ,'%')
+        </if> 
+      </if>
+      <choose>
+        <when test="page != 0">
+        limit #{page} ,10
+        </when>
+        <otherwise>
+        limit 0, 10
+        </otherwise>
+      </choose>
+   </select>   
+   
+   <select id="totalBoard" resultType="Integer">
+        SELECT
+            count(*)
+        FROM SAMPLE
+   </select>
+
+   
+   <update id="modifyBoardDetail">
+      UPDATE SAMPLE   
+      SET
+          SUBJECT = #{subject},
+          GRADE = #{grade},
+          USE_YN = #{useYn},
+          DESCRIPTION = #{description},
+          REG_USER = #{regUser}
+      WHERE ID = #{id}    
+   </update>
+   
+   
+</mapper>
