@@ -132,48 +132,6 @@ public class MvcController {
 		 return mv;
 	   }
 	   
-	   
+	}	   
 ////////////////////////////////////////////////////////////////////////////////////	   
 	
-	   @RequestMapping("/selectSubjectList")
-	   public ModelAndView selectSubjectList(String searchKeyword, String searchCondition,int page) throws Exception{
-	      ModelAndView mv =new ModelAndView();
-	      mv.addObject("subjectList", boardService.selectSubjectList(searchKeyword, searchCondition, (page-1)*10));
-	      mv.addObject("searchKeyword",searchKeyword);
-	      mv.addObject("currentPage",page);
-	      mv.setViewName("board2");
-	      return mv;
-	   }
-	   
-	  
-	  @RequestMapping("/boardDetail.do")
-	  public ModelAndView boardDetail(String no) throws Exception{
-		  ModelAndView mv = new ModelAndView();
-		  mv.addObject("detailBoard",boardService.selectSubjectOne(no));
-		  mv.setViewName("boardDetail");
-		  return mv;
-	  }
-	  
-	  @RequestMapping("/modifyBoardDetail.do")
-	  public ModelAndView modifyBoardDetail(String id, String subject,
-			  String grade, String useYn, String description, String regUser) throws Exception{
-		  HashMap<String, String> hashMap = new HashMap<String, String>();
-		  hashMap.put("id",id);
-		  hashMap.put("subject",subject);
-		  hashMap.put("grade",grade);
-		  hashMap.put("useYn",useYn);
-		  hashMap.put("description",description);
-		  hashMap.put("regUser",regUser);
-		  boardService.modifyBoardDetail(hashMap);
-		  return boardDetail(id);  
-	  }
-	  
-		
-	  @RequestMapping("/deleteBoardDetail.do") 
-	  public ModelAndView deleteBoardDetail(String no) throws Exception{
-		 boardService.deleteBoardDetail(no); 
-		 return selectSubjectList("","",0);
-	  }
-	  
-
-}

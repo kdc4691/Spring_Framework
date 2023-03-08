@@ -32,13 +32,13 @@ public class BoardService {
    
    public List<?> login(String inputUserName) throws Exception{
 	      return board.login(inputUserName);   
-   }
+   } 
 
    
    public int registProduct(HashMap<String, String> map) throws Exception{
 	   return board.registProduct(map);
    }
-   
+      
    public List<?> products() throws Exception{
 	      return board.products();   
    }
@@ -49,28 +49,8 @@ public class BoardService {
 	   return board.deleteProduct(pcode);
    }
    
-
+}
 ///////////////////////////////////////////////////////////////////////////////
    
    
-   public List<?> selectSubjectList(String searchKeyword, String searchCondition, int page) throws Exception{
-      return (List<?>) board.selectSubjectList(searchKeyword, searchCondition, page);   
-   }
-   
-   public HashMap selectSubjectOne(String no) throws Exception{
-      return board.selectSubjectOne(no);
-   }
-   
-   
-   public int modifyBoardDetail(HashMap<String, String> map) throws Exception{
-	   return board.modifyBoardDetail(map);
-   }
-   
-   public int deleteBoardDetail(String no) throws Exception{
-	   return board.deleteBoardDetail(no);
-   }
-   
-   public HashMap Paging(String page) throws Exception{
-	      return board.selectSubjectOne(page);
-	   }
-}
+ 
