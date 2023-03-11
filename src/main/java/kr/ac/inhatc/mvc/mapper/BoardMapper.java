@@ -16,11 +16,5 @@ public interface BoardMapper {
 
    public int deleteProduct(String pcode) throws Exception; 
    
-   public String getName() throws Exception;
-   public List<?> selectSubjectList(String keyword, String condition, int page) throws Exception;
-   public HashMap selectSubjectOne(String no) throws Exception;
-   public int modifyBoardDetail(HashMap<String, String> map) throws Exception;
-   public int deleteBoardDetail(String no) throws Exception; 
-   
-   public HashMap Paging(String page) throws Exception;
+
 }
